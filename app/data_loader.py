@@ -3,14 +3,17 @@ import pandas as pd
 import numpy as np
 import joblib
 import shap
+import os  
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 @st.cache_resource
 def load_ai_engines():
-    scaler = joblib.load('scaler.pkl')
+    scaler = joblib.load(os.path.join(BASE_DIR, 'scaler.pkl'))
     models = {
-        'ROS':   joblib.load('xgb_ros.pkl'),
-        'SMOTE': joblib.load('xgb_smote.pkl'),
-        'ADASYN':joblib.load('xgb_adasyn.pkl')
+        'ROS':   joblib.load(os.path.join(BASE_DIR, 'xgb_ros.pkl')),
+        'SMOTE': joblib.load(os.path.join(BASE_DIR, 'xgb_smote.pkl')),
+        'ADASYN':joblib.load(os.path.join(BASE_DIR, 'xgb_adasyn.pkl'))
     }
     explainers = {
         'ROS':   shap.TreeExplainer(models['ROS']),
@@ -21,7 +24,9 @@ def load_ai_engines():
 
 @st.cache_data
 def load_and_predict():
-    df = pd.read_csv('../data/gym_churn_featured.csv')
+    csv_path = os.path.join(BASE_DIR, '..', 'data', 'gym_churn_featured.csv')
+    df = pd.read_csv(csv_path)
+    
     df_live = df.drop(columns=['Churn'], errors='ignore')
     X_math = df_live.drop(columns=['Name', 'Email', 'Phone_Number'])
 
