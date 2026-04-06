@@ -1,5 +1,7 @@
 # 🏋️‍♂️ GymSense
 
+**🟢 Live Application:** [Click here to view the interactive dashboard!](https://gym-churn-predictor-rvbpnowlgk3aqwz7en9tud.streamlit.app/)
+
 ## Project Overview
 Customer retention is one of the biggest challenges in the fitness industry. 
 This project provides a robust, end-to-end Machine Learning pipeline designed to predict gym member churn. 
@@ -47,3 +49,4 @@ Gym-Churn-Predictor/
 │
 ├── requirements.txt            # Python dependencies
 └── README.md                   # Project documentation
+
